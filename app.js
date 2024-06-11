@@ -10,5 +10,11 @@ const schema = new mongoose.Schema({ title: String });
 const Task = mongoose.model('Task', schema);
 
 //insert
-const firstTask = new Task({ title: 'Learn Node.js' });
-firstTask.save().then(() => console.log('new Record inserted'));
+app.get('/create', (req, res) => {
+  const firstTask = new Task({ title: 'Writing function of express' });
+  firstTask.save().then(() => console.log('new Record inserted'));
+});
+
+
+
+app.listen(3000, () => console.log('Express Started!'));
