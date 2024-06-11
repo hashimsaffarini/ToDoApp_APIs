@@ -28,5 +28,16 @@ app.get('/', async (req, res) => {
   }
 });
 
+//delete
+app.get('/delete/:id', async (req, res) => {
+  try {
+    //delete a task
+    await Task.deleteOne({ _id: req.params.id });
+    console.log('Task deleted');
+  } catch (error) {
+    console.log(`There was an error: ${error}`);
+  }
+});
+
 
 app.listen(3000, () => console.log('Express Started!'));
