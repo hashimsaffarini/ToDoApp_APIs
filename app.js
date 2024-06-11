@@ -39,5 +39,16 @@ app.get('/delete/:id', async (req, res) => {
   }
 });
 
+//update
+app.get('/update/:id/:title', async (req, res) => {
+  try {
+    //update a task
+    await Task.updateOne({ _id: req.params.id }, { title: req.params.title });
+    console.log('Task updated');
+  } catch (error) {
+    console.log(`There was an error: ${error}`);
+  }
+});
+
 
 app.listen(3000, () => console.log('Express Started!'));
