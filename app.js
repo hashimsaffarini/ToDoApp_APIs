@@ -10,11 +10,23 @@ const schema = new mongoose.Schema({ title: String });
 const Task = mongoose.model('Task', schema);
 
 //insert
-app.get('/create', (req, res) => {
-  const firstTask = new Task({ title: 'Writing function of express' });
+app.get('/create/:title', (req, res) => {
+  const firstTask = new Task({ title: req.params.title });
   firstTask.save().then(() => console.log('new Record inserted'));
 });
 
+//find/show
+app.get('/', async (req, res) => {
+  try {
+    //get all tasks collection
+    const tasks = await Task.find({});
+    tasks.forEach(task => {
+      console.log(task);
+    });
+  } catch (error) {
+    console.log(`There was an error: ${error}`);
+  }
+});
 
 
 app.listen(3000, () => console.log('Express Started!'));
